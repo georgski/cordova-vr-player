@@ -1,12 +1,18 @@
 {
   "name": "cordova-vr-player",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "cordova": {
     "id": "cordova-vr-player",
     "platforms": [
-      "android",
-      "ios",
+      "android"
     ]
   },
+  "keywords": [
+    "ecosystem:cordova",
+    "vr",
+    "cordova-android",
+    "cordova-ios",
+    "cordova-windows"
+  ],
   "description": "Plugin allowing to play a video in VR View"
 }

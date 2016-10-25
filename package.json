@@ -1,0 +1,12 @@
+{
+  "name": "google-vr-player",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "google-vr-player",
+    "platforms": [
+      "android",
+      "ios",
+    ]
+  },
+  "description": "Plugin allowing to play a video in VR View"
+}

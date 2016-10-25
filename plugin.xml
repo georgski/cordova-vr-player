@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="google-vr-player"
+    version="1.0.0">
+    <name>Google VR Player</name>
+    <description></description>
+    <license>MIT</license>
+    <keywords></keywords>
+
+    <!-- android -->
+    <platform name="android">
+      <js-module src="www/plugin.js" name="plugin">
+        <runs/>
+
+        <clobbers target="GoogleVRPlayer" />
+      </js-module>
+      <config-file target="res/xml/config.xml" parent="/*">
+        <feature name="GoogleVRPlayer">
+          <param name="android-package" value="com.neotrino.GoogleVRPlayer" />
+          <param name="onload" value="true" />
+        </feature>
+      </config-file>
+      <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <activity android:name="com.neotrino.VrVideoActivity">
+            <intent-filter>
+                <action android:name="PLAY_VR_VIDEO" />
+            </intent-filter>
+        </activity>
+      </config-file>
+      <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+      <resource-file src="src/android/libs/common.aar" target="libs/common.aar" />
+      <resource-file src="src/android/libs/commonwidget.aar" target="libs/commonwidget.aar" />
+      <resource-file src="src/android/libs/videowidget.aar" target="libs/videowidget.aar" />
+
+      <source-file src="src/android/java/neotrino/GoogleVRPlayer.java" target-dir="src/com/neotrino/" />
+      <source-file src="src/android/java/neotrino/VrVideoActivity.java" target-dir="src/com/neotrino/" />
+
+      <source-file src="src/android/res/layout/main_layout.xml" target-dir="res/layout" />
+
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <js-module src="www/plugin.js" name="plugin">
+            <runs/>
+            <clobbers target="GoogleVRPlayer" />
+        </js-module>
+        <config-file target="config.xml" parent="/*">
+            <feature name="GoogleVRPlayer">
+                <param name="ios-package" value="GoogleVRPlayer" onload="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/GoogleVRPlayer.h" />
+        <source-file src="src/ios/GoogleVRPlayer.m" />
+    </platform>
+</plugin>

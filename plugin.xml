@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-    id="google-vr-player"
+    id="cordova-vr-player"
     version="1.0.0">
-    <name>Google VR Player</name>
+    <name>Cordova VR Player</name>
     <description></description>
     <license>MIT</license>
     <keywords></keywords>

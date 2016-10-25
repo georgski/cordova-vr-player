@@ -1,7 +1,7 @@
-Google VR Player
+Cordova VR Player
 ======
 
-A simple cordova plugin playing a video in a native [VR View](https://developers.google.com/vr/concepts/vrview) for Android and iOS. It supports both mono and stereo videos through compatibility with Google Cardboard.
+A simple cordova plugin playing a video in a native [Google VR View](https://developers.google.com/vr/concepts/vrview) for Android and iOS. It supports both mono and stereo videos through compatibility with Google Cardboard.
 
 ##Usage
 -----

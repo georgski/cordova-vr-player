@@ -1,8 +1,8 @@
 {
-  "name": "google-vr-player",
+  "name": "cordova-vr-player",
   "version": "1.0.0",
   "cordova": {
-    "id": "google-vr-player",
+    "id": "cordova-vr-player",
     "platforms": [
       "android",
       "ios",

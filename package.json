@@ -4,7 +4,8 @@
   "cordova": {
     "id": "cordova-vr-player",
     "platforms": [
-      "android"
+      "android”,
+      "ios"
     ]
   },
   "keywords": [

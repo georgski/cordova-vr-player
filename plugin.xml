@@ -7,6 +7,8 @@
     <description></description>
     <license>MIT</license>
     <keywords></keywords>
+    
+    <dependency id="cordova-plugin-cocoapod-support" url="https://github.com/Aerex/cordova-plugin-cocoapods-support/"/>
 
     <!-- android -->
     <platform name="android">
@@ -42,6 +44,7 @@
 
     <!-- ios -->
     <platform name="ios">
+        <pods-config ios-min-version="9.0" uses-frameworks="true"/>
         <js-module src="www/plugin.js" name="plugin">
             <runs/>
             <clobbers target="GoogleVRPlayer" />
@@ -54,5 +57,10 @@
 
         <header-file src="src/ios/GoogleVRPlayer.h" />
         <source-file src="src/ios/GoogleVRPlayer.m" />
+        <header-file src="src/ios/VideoPlayerViewController.h" />
+        <source-file src="src/ios/VideoPlayerViewController.m" />
+        <resource-file src="src/ios/Main.storyboard"  />
+        
+        <pod id="GVRSDK" version="1.0.1" />
     </platform>
 </plugin>

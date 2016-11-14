@@ -29,12 +29,13 @@ public class VrVideoActivity extends Activity {
 
   /** Tracks the file to be loaded across the lifetime of this app. **/
   private Uri fileUri;
+  private Uri fallbackVideoUri;
 
   /** Configuration information for the video. **/
   private Options videoOptions = new Options();
 
   private VideoLoaderTask backgroundVideoLoaderTask;
-
+  private Boolean fallbackVideoLoaded = false;
   /**
    * The video view and its custom UI elements.
    */
@@ -81,18 +82,7 @@ public class VrVideoActivity extends Activity {
   }
 
 
-  /**
-   * Load custom videos based on the Intent or load the default video. See the Javadoc for this
-   * class for information on generating a custom intent via adb.
-   */
-  private void handleIntent(Intent intent) {
-    Bundle extras = intent.getExtras();
-    if (extras != null) {
-      fileUri = Uri.parse(extras.getString("videoUrl"));
-    } else {
-      fileUri = null;
-    }
-
+  private void launchVideoLoader(Uri fileUri) {
     // Load the bitmap in a background thread to avoid blocking the UI thread. This operation can
     // take 100s of milliseconds.
     if (backgroundVideoLoaderTask != null) {
@@ -101,6 +91,24 @@ public class VrVideoActivity extends Activity {
     }
     backgroundVideoLoaderTask = new VideoLoaderTask();
     backgroundVideoLoaderTask.execute(Pair.create(fileUri, videoOptions));
+  }
+  /**
+   * Load custom videos based on the Intent or load the default video. See the Javadoc for this
+   * class for information on generating a custom intent via adb.
+   */
+  private void handleIntent(Intent intent) {
+    Bundle extras = intent.getExtras();
+    if (extras != null) {
+      fileUri = Uri.parse(extras.getString("videoUrl"));
+      String fallbackVideo = extras.getString("fallbackVideoUrl");
+      if (fallbackVideo != null)
+        fallbackVideoUri = Uri.parse(fallbackVideo);
+    } else {
+      fileUri = null;
+    }
+
+    launchVideoLoader(fileUri);
+
   }
 
   @Override
@@ -151,9 +159,15 @@ public class VrVideoActivity extends Activity {
     public void onLoadError(String errorMessage) {
       // An error here is normally due to being unable to decode the video format.
       loadVideoStatus = LOAD_VIDEO_STATUS_ERROR;
-      Toast.makeText(
-              VrVideoActivity.this, "Error loading video: " + errorMessage, Toast.LENGTH_LONG)
-              .show();
+      //Attempt to load fallback video
+      if (!fallbackVideoLoaded){
+        fallbackVideoLoaded = true;
+        launchVideoLoader(fallbackVideoUri);
+      }else {
+        Toast.makeText(
+                VrVideoActivity.this, "Error loading video: " + errorMessage, Toast.LENGTH_LONG)
+                .show();
+      }
       Log.e(TAG, "Error loading video: " + errorMessage);
     }
 

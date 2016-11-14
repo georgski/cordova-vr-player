@@ -32,10 +32,12 @@ public class GoogleVRPlayer extends CordovaPlugin {
   public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
     if(action.equals("playVideo")) {
       String videoUrl = args.getString(0);
+      String fallbackVideoUrl = args.getString(1);
       Log.d(TAG, videoUrl);
       Context context=this.cordova.getActivity().getApplicationContext();
-      Intent intent=new Intent(context, VrVideoActivity.class);                  
+      Intent intent=new Intent(context, VrVideoActivity.class);     
       intent.putExtra("videoUrl", videoUrl);
+      intent.putExtra("fallbackVideoUrl", fallbackVideoUrl);
       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
       
       context.startActivity(intent);
